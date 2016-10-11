@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Data.SQLite;
-using System.Data.Common;
 using System.Data;
+using System.Data.Common;
+using System.Data.SQLite;
 using System.IO;
 
 namespace cwserver.DBConnection {
@@ -13,17 +9,16 @@ namespace cwserver.DBConnection {
         private static readonly SQLiteConnection Connection;
 
         static DBConnection() {
-            string dbPath = ConfigurationManager.AppSettings["DB_PATH"];
+            var dbPath = Environment.GetEnvironmentVariable("CWSERVER_DBPATH");
 
-            if (dbPath == null) {
-                throw new Exception("DB_PATH variable is not set in config file");
-            }
+            if (dbPath == null) throw new Exception("CWSERVER_DBPATH environment variable is not set");
 
-            string baseName = Path.Combine(dbPath, "cwserver.db3");
+            var baseName = Path.Combine(dbPath, "cwserver.db3");
+            Directory.CreateDirectory(dbPath);
             SQLiteConnection.CreateFile(baseName);
 
-            var factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
-            Connection = (SQLiteConnection)factory.CreateConnection();
+            var factory = (SQLiteFactory) DbProviderFactories.GetFactory("System.Data.SQLite");
+            Connection = (SQLiteConnection) factory.CreateConnection();
             Connection.ConnectionString = "Data Source = " + baseName;
             Connection.Open();
 
