@@ -8,9 +8,9 @@ using System.Data.Common;
 using System.Data;
 using System.IO;
 
-namespace cwserver {
+namespace cwserver.DBConnection {
     public static class DBConnection {
-        private static SQLiteConnection connection;
+        private static readonly SQLiteConnection Connection;
 
         static DBConnection() {
             string dbPath = ConfigurationManager.AppSettings["DB_PATH"];
@@ -22,25 +22,27 @@ namespace cwserver {
             string baseName = Path.Combine(dbPath, "cwserver.db3");
             SQLiteConnection.CreateFile(baseName);
 
-            SQLiteFactory factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
-            connection = (SQLiteConnection)factory.CreateConnection();
-            connection.ConnectionString = "Data Source = " + baseName;
-            connection.Open();
+            var factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
+            Connection = (SQLiteConnection)factory.CreateConnection();
+            Connection.ConnectionString = "Data Source = " + baseName;
+            Connection.Open();
 
-            using (var command = new SQLiteCommand(connection)) {
+            using (var command = new SQLiteCommand(Connection)) {
                 command.CommandText =
                     @"CREATE TABLE users (
                     id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    name char(100) NOT NULL
-                    );
-                    INSERT INTO users(name) VALUES ('User');";
+                    name char(100) NOT NULL UNIQUE,
+                    pass_hash char(100) NOT NULL,
+                    GUID char(100) NOT NULL UNIQUE
+                    );";
                 command.CommandType = CommandType.Text;
                 command.ExecuteNonQuery();
+                UserDatabase.RegisterUser("admin", "password");
             }
         }
 
         public static SQLiteCommand GetCommand() {
-            return new SQLiteCommand(connection);
+            return new SQLiteCommand(Connection);
         }
     }
 }
