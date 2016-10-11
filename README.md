@@ -9,7 +9,9 @@
 * Choose "Deployment options"
 * Choose Github
 * Choose your forked repository
-* Check your Web App root path, if it different from "D:\home\site\wwwroot\", change "DB_PATH" variable in Web.config file
+* Set CWSERVER_DBPATH environment variable:
+    * Choose "Application settings"
+    * Scroll to "App settings" and set environment variable
 
 ### From VisualStudio
 * Open project with Visual Studio
@@ -22,5 +24,5 @@ You need installed Visual Studio 2015 and IIS Express
 
 ### Hosting with IIS Express
 * Compile project in VS
-* Change "DB_PATH" variable in Web.config to path where database will be placed
+* Set CWSERVER_DBPATH environment variable
 * Run iisexpress.exe as adminitrator (default path:"C:\Program Files\IIS Express") with parameter: "/path:<full path to your project folder>". More about running IIS Express from console: https://www.iis.net/learn/extensions/using-iis-express/running-iis-express-from-the-command-line
