@@ -1,3 +1,6 @@
+# CosmicWar
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TheLocky/cosmicwar?svg=true)](https://ci.appveyor.com/project/TheLocky/cosmicwar)
+
 # Installing
 
 ## Deploy On Azure
