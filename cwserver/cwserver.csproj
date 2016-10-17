@@ -130,6 +130,8 @@
     <Compile Include="DBConnection\DBConnection.cs" />
     <Compile Include="DBConnection\UserDatabase.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="NancyModules\AuthorizationModule.cs" />
+    <Compile Include="NancyModules\RegistrationModule.cs" />
     <Compile Include="NancyModules\SecureModule.cs" />
     <Compile Include="NancyModules\HelloWorldModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
