@@ -109,6 +109,14 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\cosmicwar-jiukaviy - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WindowsServer - Web Deploy.pubxml" />
+    <Content Include="recources\css\app.css" />
+    <Content Include="recources\css\foundation.css" />
+    <Content Include="recources\css\foundation.min.css" />
+    <Content Include="recources\js\app.js" />
+    <Content Include="recources\js\vendor\foundation.js" />
+    <Content Include="recources\js\vendor\foundation.min.js" />
+    <Content Include="recources\js\vendor\jquery.js" />
+    <Content Include="recources\js\vendor\what-input.js" />
     <Content Include="Views\index.cshtml" />
     <Content Include="Views\login.cshtml" />
     <Content Include="Views\secure.cshtml" />

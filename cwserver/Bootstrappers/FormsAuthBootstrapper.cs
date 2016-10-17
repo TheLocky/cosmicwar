@@ -5,6 +5,7 @@ namespace cwserver.Bootstrappers {
     using Nancy.Bootstrapper;
     using Nancy.TinyIoc;
     using Nancy.Authentication.Forms;
+    using Nancy.Conventions;
 
     public class FormsAuthBootstrapper : DefaultNancyBootstrapper {
         protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
@@ -19,6 +20,12 @@ namespace cwserver.Bootstrappers {
             // As this is now per-request we could inject a request scoped
             // database "context" or other request scoped services.
             container.Register<IUserMapper, UserDatabase>();
+        }
+
+        protected override void ConfigureConventions(NancyConventions conventions) {
+            base.ConfigureConventions(conventions);
+
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("recources"));
         }
 
         protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context) {
