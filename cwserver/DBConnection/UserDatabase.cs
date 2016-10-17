@@ -34,10 +34,18 @@ namespace cwserver.DBConnection {
             }
         }
 
-        public static Guid? ValidateUser(string name, string password) {
+        private static bool CheckUsernameAndPassword(string username, string password) {
+            return !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password);
+        }
+
+        public static Guid? ValidateUser(string username, string password) {
+            if (!CheckUsernameAndPassword(username, password)) {
+                return null;
+            }
+
             using (var cmd = DBConnection.GetCommand()) {
                 cmd.CommandText = @"SELECT GUID FROM Users WHERE name = @name AND pass_hash = @pass_hash;";
-                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@name", username);
                 cmd.Parameters.AddWithValue("@pass_hash", GetPasswordHash(password));
                 var result = (string)cmd.ExecuteScalar();
                 if (result == null) {
@@ -48,6 +56,10 @@ namespace cwserver.DBConnection {
         }
 
         public static void RegisterUser(string username, string password) {
+            if (!CheckUsernameAndPassword(username, password)) {
+                throw new Exception(message: "Please type your username and password");
+            }
+
             using (var cmd = DBConnection.GetCommand()) {
                 cmd.CommandText = @"INSERT INTO users(name, pass_hash, GUID) VALUES (@user, @pass_hash, @GUID);";
                 cmd.Parameters.AddWithValue("@user", username);
