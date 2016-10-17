@@ -6,7 +6,7 @@ namespace cwserver.NancyModules {
     public class RegistrationModule : NancyModule {
         public RegistrationModule() {
             Get["/register"] = args => View["register.cshtml",
-                new { register = true }];
+                 new { errorMessage = (string)null }];
 
             Post["/register"] = args => {
                 string username = Request.Form.Username;
@@ -14,18 +14,13 @@ namespace cwserver.NancyModules {
 
                 try {
                     UserDatabase.RegisterUser(username, password);
-                }
+                } 
                 catch (Exception e) {
-                    return View["register.cshtml", new {
-                        register = false,
-                        message = e.Message
-                    }];
+                    return View["register.cshtml",
+                        new { errorMessage = e.Message }];
                 }
 
-                return View["register.cshtml", new {
-                    register = false,
-                    message = "Register succesfull"
-                }];
+                return View["success_register.cshtml"];
             };
         }
     }

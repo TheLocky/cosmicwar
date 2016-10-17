@@ -1,16 +1,39 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Sign In";
 }
-
-<form method="POST">
-    Username <input type="text" name="Username" />
-    <br />
-    Password <input name="Password" type="password" />
-    <br />
-    Remember Me <input name="RememberMe" type="checkbox" value="True" />
-    <br />
-    <input type="submit" value="Login" />
-</form>
-@if (Model.Errored) {
-    <div id="errorBox" class="floatingError">Invalid Username or Password</div>
+@if (Model.errorMessage != null) {
+    <div class="row">
+        <div class="large-4 large-centered columns">
+            <div class="callout alert">
+                @Model.errorMessage
+            </div>
+        </div>
+    </div>
 }
+<div class="row">
+    <div class="large-4 large-centered columns">
+        <div class="callout">
+            <form data-abide novalidate method="post">
+                <label>
+                    <input type="text" name="Username" placeholder="Login" required>
+                    <span class="form-error">
+                        Yo, you had better fill this out, it's required.
+                    </span>
+                </label>
+                <label>
+                    <input type="password" name="Password" placeholder="Password" required>
+                    <span class="form-error">
+                        I'm required!
+                    </span>
+                </label>
+                <input id="RememberMe" name="RememberMe" type="checkbox"><label for="RememberMe">Remember Me</label>
+                <div class="row">
+                    <fieldset class="large-12 columns">
+                        <button class="button" type="submit" formaction="login">Sign in</button>
+                        <a href="register" class="button success">Sign Up</a>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

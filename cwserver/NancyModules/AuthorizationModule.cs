@@ -6,8 +6,8 @@ using Nancy.Authentication.Forms;
 namespace cwserver.NancyModules {
     public class AuthorizationModule : NancyModule {
         public AuthorizationModule() {
-            Get["/login"] = args => View["login.cshtml", 
-                    new { Errored = false }];
+            Get["/login"] = args => View["login.cshtml",
+                    new { errorMessage = (string) null }];
 
             Post["/login"] = args => {
                 string username = Request.Form.Username;
@@ -17,7 +17,7 @@ namespace cwserver.NancyModules {
 
                 if (userGuid == null) {
                     return View["login.cshtml",
-                        new { Errored = true }];
+                        new { errorMessage = "Invalid username or password" }];
                 }
 
                 DateTime? expiry = null;

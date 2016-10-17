@@ -121,6 +121,9 @@
     <Content Include="Views\login.cshtml" />
     <Content Include="Views\secure.cshtml" />
     <Content Include="Views\register.cshtml" />
+    <Content Include="Views\_BasicLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\success_register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

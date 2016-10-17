@@ -5,11 +5,16 @@
     <meta charset="utf8" @RenderSection("meta", required: false) />
     <title>@ViewBag.Title</title>
 
+    <link rel="stylesheet" href="recources/css/foundation.css" />
+    <link rel="stylesheet" href="recources/css/app.css" />
     @RenderSection("styles", required: false)
 </head>
 <body>
     @RenderBody()
 
+    <script src="recources/js/vendor/jquery.js"></script>
+    <script src="recources/js/vendor/foundation.min.js"></script>
+    <script src="recources/js/app.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
