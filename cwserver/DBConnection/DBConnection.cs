@@ -3,19 +3,20 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.IO;
+using System.Web;
 
 namespace cwserver.DBConnection {
     public static class DBConnection {
         private static SQLiteConnection _connection;
 
         private static void AddFixtures() {
-            UserDatabase.RegisterUser("admin", "password");
+            //UserDatabase.RegisterUser("admin", "password");
         }
 
         private static void MakeTables() {
             using (var command = GetCommand()) {
                 command.CommandText =
-                    @"CREATE TABLE users (
+                    @"CREATE TABLE IF NOT EXISTS users (
                         id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                         name char(100) NOT NULL UNIQUE,
                         pass_hash char(100) NOT NULL,
@@ -27,15 +28,13 @@ namespace cwserver.DBConnection {
         }
 
         private static void InitConnection() {
-            var dbPath = Environment.GetEnvironmentVariable("CWSERVER_DBPATH");
-
-            if (dbPath == null) {
-                throw new Exception("CWSERVER_DBPATH environment variable is not set");
-            }
+            var dbPath = Environment.GetEnvironmentVariable("CWSERVER_DBPATH") ??
+                         Path.Combine(HttpRuntime.AppDomainAppPath, "db");
 
             var baseName = Path.Combine(dbPath, "cwserver.db3");
             Directory.CreateDirectory(dbPath);
-            SQLiteConnection.CreateFile(baseName);
+            if (!File.Exists(baseName))
+                SQLiteConnection.CreateFile(baseName);
 
             var factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
             _connection = (SQLiteConnection)factory.CreateConnection();
