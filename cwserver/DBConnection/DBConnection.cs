@@ -10,7 +10,20 @@ namespace cwserver.DBConnection {
         private static SQLiteConnection _connection;
 
         private static void AddFixtures() {
-            //UserDatabase.RegisterUser("admin", "password");
+            UserDatabase.RegisterUser("admin", "password");
+        }
+
+        private static void AddFixturesIfNotExist() {
+            using (var command = GetCommand()) {
+                command.CommandText =
+                    @"SELECT COUNT(*) FROM users";
+                command.CommandType = CommandType.Text;
+                var count = (long)command.ExecuteScalar();
+
+                if (count == 0) {
+                    AddFixtures();
+                }
+            }
         }
 
         private static void MakeTables() {
@@ -46,7 +59,7 @@ namespace cwserver.DBConnection {
             InitConnection();
 
             MakeTables();
-            AddFixtures();
+            AddFixturesIfNotExist();
         }
 
         public static SQLiteCommand GetCommand() {
