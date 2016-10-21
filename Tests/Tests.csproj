@@ -63,15 +63,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\cwserver\packages\SonghayCoreTesting.1.0.0\lib\net452\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\cwserver\packages\SonghayCore.1.6.1\lib\net452\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Songhay, Version=2.0.0.38816, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\cwserver\packages\SonghayCoreTesting.1.0.0\lib\net452\Songhay.dll</HintPath>
+    <Reference Include="Songhay, Version=2.0.0.31201, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\cwserver\packages\SonghayCore.1.6.1\lib\net452\Songhay.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SonghayCore, Version=1.0.0.38817, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\cwserver\packages\SonghayCoreTesting.1.0.0\lib\net452\SonghayCore.dll</HintPath>
+    <Reference Include="SonghayCore, Version=1.0.0.31202, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\cwserver\packages\SonghayCore.1.6.1\lib\net452\SonghayCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SonghayCoreTesting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -102,6 +102,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="appveyor.yml" />
     <None Include="packages.config" />
   </ItemGroup>
