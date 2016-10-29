@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cwserver", "cwserver.csproj", "{8B572CAD-7536-44DA-8279-2F8B29CE20DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWServer", "CWServer\CWServer.csproj", "{BA6B3AAF-2CE0-4E4A-A292-0986BE3416C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{3C80C571-D9E2-4EA4-BC2C-EC5E40D9C8FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3C80C571-D9E2-4EA4-BC2C-EC5E40D9C8FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8B572CAD-7536-44DA-8279-2F8B29CE20DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B572CAD-7536-44DA-8279-2F8B29CE20DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B572CAD-7536-44DA-8279-2F8B29CE20DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B572CAD-7536-44DA-8279-2F8B29CE20DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA6B3AAF-2CE0-4E4A-A292-0986BE3416C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA6B3AAF-2CE0-4E4A-A292-0986BE3416C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA6B3AAF-2CE0-4E4A-A292-0986BE3416C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA6B3AAF-2CE0-4E4A-A292-0986BE3416C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C80C571-D9E2-4EA4-BC2C-EC5E40D9C8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C80C571-D9E2-4EA4-BC2C-EC5E40D9C8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C80C571-D9E2-4EA4-BC2C-EC5E40D9C8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
