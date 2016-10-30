@@ -1,12 +1,12 @@
 ﻿using Nancy;
 using Nancy.Security;
 
-namespace cwserver.NancyModules {
+namespace CWServer.NancyModules {
     public class HelloWorldModule : NancyModule {
         public HelloWorldModule() {
             this.RequiresAuthentication();
 
-            Get["/"] = args => View["index", new { user = Context.CurrentUser }];
+            Get["/"] = args => View["index", new {user = Context.CurrentUser}];
         }
     }
 }

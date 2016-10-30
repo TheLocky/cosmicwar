@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Nancy;
-using Nancy.Bootstrapper;
-using Nancy.TinyIoc;
+﻿using Nancy;
+using Nancy.Security;
 
-namespace cwserver.NancyModules {
-    using Nancy.Security;
-
+namespace CWServer.NancyModules {
     public class SecureModule : NancyModule {
         public SecureModule() : base("/secure") {
             this.RequiresAuthentication();

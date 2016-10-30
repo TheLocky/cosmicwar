@@ -1,12 +1,12 @@
 ﻿using System;
-using cwserver.DBConnection;
+using CWServer.DBConnection;
 using Nancy;
 
-namespace cwserver.NancyModules {
+namespace CWServer.NancyModules {
     public class RegistrationModule : NancyModule {
         public RegistrationModule() {
             Get["/register"] = args => View["register.cshtml",
-                 new { errorMessage = (string)null }];
+                new {errorMessage = (string) null}];
 
             Post["/register"] = args => {
                 string username = Request.Form.Username;
@@ -14,10 +14,10 @@ namespace cwserver.NancyModules {
 
                 try {
                     UserDatabase.RegisterUser(username, password);
-                } 
+                }
                 catch (Exception e) {
                     return View["register.cshtml",
-                        new { errorMessage = e.Message }];
+                        new {errorMessage = e.Message}];
                 }
 
                 return View["success_register.cshtml"];

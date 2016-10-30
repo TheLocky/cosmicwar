@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using cwserver.Models;
+using CWServer.Models;
 using Microsoft.Data.Sqlite;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Security;
 
-namespace cwserver.DBConnection {
+namespace CWServer.DBConnection {
     public class UserDatabase : IUserMapper {
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context) {
             return DB.Context.Users.SingleOrDefault(u => u.Guid == identifier.ToString());

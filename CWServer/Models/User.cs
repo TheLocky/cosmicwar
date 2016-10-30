@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Nancy.Security;
 
-namespace cwserver.Models {
+namespace CWServer.Models {
     public class User : IUserIdentity {
         public enum Claim {
             User,

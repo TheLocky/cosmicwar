@@ -1,11 +1,11 @@
-﻿using cwserver.DBConnection;
+﻿using CWServer.DBConnection;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
 
-namespace cwserver.Bootstrappers {
+namespace CWServer.Bootstrappers {
     public class StartingBootstrapper : DefaultNancyBootstrapper {
         protected override void ConfigureApplicationContainer(TinyIoCContainer container) {
             // We don't call "base" here to prevent auto-discovery of

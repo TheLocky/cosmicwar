@@ -1,13 +1,13 @@
 ﻿using System;
-using cwserver.DBConnection;
+using CWServer.DBConnection;
 using Nancy;
 using Nancy.Authentication.Forms;
 
-namespace cwserver.NancyModules {
+namespace CWServer.NancyModules {
     public class AuthorizationModule : NancyModule {
         public AuthorizationModule() {
             Get["/login"] = args => View["login.cshtml",
-                    new { errorMessage = (string) null }];
+                new {errorMessage = (string) null}];
 
             Post["/login"] = args => {
                 string username = Request.Form.Username;
@@ -15,15 +15,12 @@ namespace cwserver.NancyModules {
 
                 var userGuid = UserDatabase.ValidateUser(username, password);
 
-                if (userGuid == null) {
+                if (userGuid == null)
                     return View["login.cshtml",
-                        new { errorMessage = "Invalid username or password" }];
-                }
+                        new {errorMessage = "Invalid username or password"}];
 
                 DateTime? expiry = null;
-                if (Request.Form.RememberMe.HasValue) {
-                    expiry = DateTime.Now.AddDays(7);
-                }
+                if (Request.Form.RememberMe.HasValue) expiry = DateTime.Now.AddDays(7);
 
                 return this.LoginAndRedirect(userGuid.Value, expiry);
             };

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using cwserver.Models;
+using CWServer.Models;
 using Microsoft.Data.Entity;
 
-namespace cwserver.DBConnection {
+namespace CWServer.DBConnection {
     public static class DB {
         public static DatabaseContext Context { get; private set; }
 
