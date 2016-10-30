@@ -1,20 +1,37 @@
-﻿<!DOCTYPE html>
+﻿@using System.Collections.Generic
+@functions {
+    public static bool PropertyExists(dynamic model, string propertyName) {
+        return model != null && ((IDictionary<string, object>) model).ContainsKey(propertyName);
+    }
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
-    <meta charset="utf8" @RenderSection("meta", required: false) />
+    <meta charset="utf8" @RenderSection("meta", false)/>
     <title>@ViewBag.Title</title>
 
-    <link rel="stylesheet" href="/Res/css/foundation.css" />
-    <link rel="stylesheet" href="/Res/css/app.css" />
-    @RenderSection("styles", required: false)
+    <link rel="stylesheet" href="/Res/css/foundation.css"/>
+    <link rel="stylesheet" href="/Res/css/app.css"/>
+    @RenderSection("styles", false)
 </head>
 <body>
+    @if (PropertyExists(Model, "Exception")) {
+        <div class="exception">
+            <div class="alert callout" data-closable>
+                <p class="message">@Model.Exception.Message</p>
+                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    }
     @RenderBody()
 
     <script src="/Res/js/vendor/jquery.js"></script>
     <script src="/Res/js/vendor/foundation.min.js"></script>
     <script src="/Res/js/app.js"></script>
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
 </body>
 </html>

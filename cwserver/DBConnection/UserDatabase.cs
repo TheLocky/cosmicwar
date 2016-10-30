@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using CWServer.Exceptions;
 using CWServer.Models;
 using Microsoft.Data.Sqlite;
 using Nancy;
@@ -27,23 +28,24 @@ namespace CWServer.DBConnection {
             }
         }
 
-        private static bool CheckUsernameAndPassword(string username, string password) {
-            return !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password);
+        private static void CheckUsernameAndPassword(string username, string password) {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                throw new CWException("Please type your username and password");
         }
 
-        public static Guid? ValidateUser(string username, string password) {
-            if (!CheckUsernameAndPassword(username, password)) return null;
+        public static Guid ValidateUser(string username, string password) {
+            CheckUsernameAndPassword(username, password);
+                
             var user = DB.Context.Users.SingleOrDefault(u =>
                     (u.UserName == username) && (u.PassHash == GetPasswordHash(password)));
 
             if (user == null)
-                return null;
+                throw new CWException("Invalid username or password");
             return new Guid(user.Guid);
         }
 
         public static void RegisterUser(string username, string password, User.Claim role = User.Claim.User) {
-            if (!CheckUsernameAndPassword(username, password))
-                throw new Exception("Please type your username and password");
+            CheckUsernameAndPassword(username, password);
 
             try {
                 DB.Context.Users.Add(new User {
@@ -56,7 +58,7 @@ namespace CWServer.DBConnection {
             }
             catch (SqliteException e) {
                 //SQLITE_CONSTRAINT
-                if (e.SqliteErrorCode == 19) throw new Exception($"Username: '{username}' already existed");
+                if (e.SqliteErrorCode == 19) throw new CWException($"Username: '{username}' already existed");
             }
         }
     }

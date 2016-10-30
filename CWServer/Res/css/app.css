@@ -1,0 +1,9 @@
+.exception {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.exception p.message {
+    margin-right: 30px;
+}

@@ -1,5 +1,5 @@
-﻿using System;
-using CWServer.DBConnection;
+﻿using CWServer.DBConnection;
+using CWServer.Exceptions;
 using Nancy;
 
 namespace CWServer.NancyModules {
@@ -14,13 +14,11 @@ namespace CWServer.NancyModules {
 
                 try {
                     UserDatabase.RegisterUser(username, password);
+                    return View["success_register.cshtml"];
                 }
-                catch (Exception e) {
-                    return View["register.cshtml",
-                        new {errorMessage = e.Message}];
+                catch (CWException e) {
+                    return View["register.cshtml", new {Exception = e}];
                 }
-
-                return View["success_register.cshtml"];
             };
         }
     }
