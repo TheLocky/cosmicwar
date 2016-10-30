@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Web;
 using CWServer.Models;
@@ -18,6 +19,9 @@ namespace CWServer.DBConnection {
             Context = new DatabaseContext(baseName);
             if (Context.Database.EnsureCreated())
                 UserDatabase.RegisterUser("admin", "password", User.Claim.Admin);
+
+            if (bool.Parse(ConfigurationManager.AppSettings["dbLogging"]))
+                DBLoggerProvider.AddToContext(Context);
         }
 
         public class DatabaseContext : DbContext {

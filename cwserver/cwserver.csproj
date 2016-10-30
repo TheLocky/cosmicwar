@@ -191,6 +191,7 @@
   <ItemGroup>
     <Compile Include="Bootstrappers\StartingBootstrapper.cs" />
     <Compile Include="DBConnection\DB.cs" />
+    <Compile Include="DBConnection\DBLoggerProvider.cs" />
     <Compile Include="DBConnection\UserDatabase.cs" />
     <Compile Include="Models\Lobby.cs" />
     <Compile Include="Models\User.cs" />
