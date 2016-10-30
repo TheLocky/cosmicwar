@@ -1,0 +1,42 @@
+﻿using System;
+using System.IO;
+using System.Web;
+using cwserver.Models;
+using Microsoft.Data.Entity;
+
+namespace cwserver.DBConnection {
+    public static class DB {
+        public static DatabaseContext Context { get; private set; }
+
+        public static void Init() {
+            var dbPath = Environment.GetEnvironmentVariable("CWSERVER_DBPATH") ??
+                         Path.Combine(HttpRuntime.AppDomainAppPath, "db");
+
+            var baseName = Path.Combine(dbPath, "cwserver.db3");
+            Directory.CreateDirectory(dbPath);
+
+            Context = new DatabaseContext(baseName);
+            if (Context.Database.EnsureCreated())
+                UserDatabase.RegisterUser("admin", "password", User.Claim.Admin);
+        }
+
+        public class DatabaseContext : DbContext {
+            private readonly string _dbName;
+
+            public DatabaseContext(string dbName) {
+                _dbName = dbName;
+            }
+
+            //Models
+            public DbSet<User> Users { get; set; }
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+                optionsBuilder.UseSqlite($"DataSource={_dbName}");
+            }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder) {
+                modelBuilder.Entity<User>().HasAlternateKey(c => c.UserName);
+            }
+        }
+    }
+}
