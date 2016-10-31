@@ -1,0 +1,46 @@
+﻿@using CWServer.Models
+@{
+    ViewBag.Title = "Lobby list";
+}
+
+<div class="row">
+    <div class="large-11 column">
+        <div class="callout">
+            <h3>Lobby list</h3>
+            <form method="post">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Players</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.LobbyList.Count == 0) {
+                        <tr>
+                            <td colspan="4">No have lobbies</td>
+                        </tr>
+                    }
+                    @foreach (var lobby in Model.LobbyList) {
+                        <tr>
+                            <td>@lobby.Owner.UserName</td>
+                            <td>@lobby.Players.Count</td>
+                            <td>@lobby.Status.ToString()</td>
+                            <td>
+                                @if (lobby.Status == Lobby.State.Wait) {
+                                    <button type="submit" class="success button" name="Join" value="@lobby.Id">
+                                        Join
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <button type="submit" class="success button" name="Create">Create</button>
+            </form>
+        </div>
+    </div>    
+</div>

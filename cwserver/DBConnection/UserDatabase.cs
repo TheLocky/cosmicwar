@@ -35,7 +35,7 @@ namespace CWServer.DBConnection {
 
         public static Guid ValidateUser(string username, string password) {
             CheckUsernameAndPassword(username, password);
-                
+
             var user = DB.Context.Users.SingleOrDefault(u =>
                     (u.UserName == username) && (u.PassHash == GetPasswordHash(password)));
 
@@ -60,6 +60,10 @@ namespace CWServer.DBConnection {
                 //SQLITE_CONSTRAINT
                 if (e.SqliteErrorCode == 19) throw new CWException($"Username: '{username}' already existed");
             }
+        }
+
+        public static User GetUser(int id) {
+            return DB.Context.Users.SingleOrDefault(u => u.Id == id);
         }
     }
 }

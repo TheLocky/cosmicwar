@@ -1,0 +1,64 @@
+﻿@using CWServer.Models
+@{
+    ViewBag.Title = "Lobby " + Model.Lobby.Id;
+}
+@{
+    var isOwner = (Html.CurrentUser != null) && (Html.CurrentUser == Model.Lobby.Owner);
+}
+
+<div class="row">
+    <div class="large-11 column">
+        <div class="callout">
+            <h3>Lobby info</h3>
+            <div class="callout">
+                Status: @Model.Lobby.Status.ToString()
+            </div>
+            <form method="post">
+                <div class="row">
+                    <div class="large-7 columns">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th colspan="2">Player list</th>
+                            </tr>
+                            <tr>
+                                <th>Player name</th>
+                                @if (isOwner) {
+                                    <th>Action</th>
+                                }
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var user in Model.Lobby.Players) {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    @if (isOwner && (Html.CurrentUser != user)) {
+                                        <td>
+                                            <button type="submit" class="alert button" name="Kick" value="@user.Id">
+                                                Kick
+                                            </button>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="large-3 columns">
+                        @if (isOwner) {
+                            @if (Model.Lobby.Status == Lobby.State.Wait) {
+                                <button type="submit" class="success button" name="Start">Start game</button>
+                            }
+                            else {
+                                <button type="submit" class="success button" name="Stop">Stop game</button>
+                            }
+                        }
+                        else {
+                            <button type="submit" class="alert button" name="Leave">Leave</button>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

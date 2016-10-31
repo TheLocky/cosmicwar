@@ -33,6 +33,7 @@ namespace CWServer.DBConnection {
 
             //Models
             public DbSet<User> Users { get; set; }
+            public DbSet<Lobby> Lobbies { get; set; }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
                 optionsBuilder.UseSqlite($"DataSource={_dbName}");
